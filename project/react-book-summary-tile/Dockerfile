@@ -2,8 +2,9 @@
 FROM node:12 as react-build
 WORKDIR /app
 COPY . ./
-RUN npm
-RUN npm build publish
+RUN npm install
+RUN npm install http-server
+RUN npm run publish
 
 # stage: 2 — the production environment
 FROM nginx:alpine
