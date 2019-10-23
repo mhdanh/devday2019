@@ -11,7 +11,7 @@ spec:
   template:                   # actually, this is the pod template, describes a pod that is launched
     metadata:
       labels:
-        app: zapier # this should match with the matchLabels value above, otherwise, this kind of pod will not be controlled by the above deployment
+        app: book-summary-tile # this should match with the matchLabels value above, otherwise, this kind of pod will not be controlled by the above deployment
     spec:
       containers:
       - name: book-summary-tile-container
