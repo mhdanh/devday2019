@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-summary-tile-deployment
+  #namespace: mhdanh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:              # tells what pods the deployment will apply to, refer to line number 11 for pod template
+      app: book-summary-tile
+  template:                   # actually, this is the pod template, describes a pod that is launched
+    metadata:
+      labels:
+        app: book-summary-tile # this should match with the matchLabels value above, otherwise, this kind of pod will not be controlled by the above deployment
+    spec:
+      containers:
+      - name: book-summary-tile-container
+        image: devday.azurecr.io/book-summary-tile:v1
+        # Add opening port
+        ports:                                      #+
+        - containerPort: 80                       #+
+          name: http                                #+
+        - containerPort: 80                       #+
+          name: http-admin                          #+
+      imagePullSecrets:
+      - name: devday-secret-docker-register
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: book-summary-tile-service
+  #namespace: mhdanh
+spec:
+  type: LoadBalancer
+#  type: NodePort
+  selector:
+    app: book-summary-tile
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
