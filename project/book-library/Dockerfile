@@ -3,7 +3,7 @@ FROM node:12 as build-stage
 WORKDIR /app
 COPY . ./
 RUN npm install
-RUN npm run build -- --output-path=./build --configuration=production
+RUN npm run build --output-path=./build --configuration=production
 
 # stage: 2 — the production environment
 FROM nginx:alpine
