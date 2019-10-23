@@ -18,9 +18,9 @@ spec:
         image: devday.azurecr.io/book-summary-tile:v1
         # Add opening port
         ports:                                      #+
-        - containerPort: 8080                       #+
+        - containerPort: 80                       #+
           name: http                                #+
-        - containerPort: 9990                       #+
+        - containerPort: 80                       #+
           name: http-admin                          #+
       imagePullSecrets:
       - name: devday-secret-docker-register
@@ -37,5 +37,5 @@ spec:
     app: book-summary-tile
   ports:
   - port: 80
-    targetPort: 8080
+    targetPort: 80
     protocol: TCP
